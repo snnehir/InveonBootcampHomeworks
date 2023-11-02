@@ -1,0 +1,92 @@
+﻿@using System.Security.Claims;
+
+@{
+    var claims = User.Identity != null ? ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims : null;
+    var userMail = claims?.SingleOrDefault(m => m.Type == "email")?.Value;
+    var userName = User.Identity?.Name;
+}
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script>
+  
+        $(document).ready(function () {
+            $("#chat-button").click(function () {
+                $("#chat-container").show();
+                $("#chat-button").hide();
+            });
+
+            $("#close-button").click(function () {
+                $("#chat-container").hide();
+                $("#chat-button").show();
+            });
+
+            // signalr connection to get sended messages
+            function setupConnection() {
+                var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+                connection.on("lastMessage", function (message) {
+                    const createdAtDate = new Date(message.createdAt)
+                    const hour = createdAtDate.getHours() === 0 ? "00" : createdAtDate.getHours()
+                    const minute = createdAtDate.getMinutes() === 0 ? "00" : createdAtDate.getMinutes()
+                    const createdAt =  `${hour}.${minute}`
+                    const isMessageFromCurrentUser = message.senderUserMail === "@userMail"
+                    const messageSender = `${isMessageFromCurrentUser ? `<strong>Sen</strong>` : message.senderName}`
+
+                    if (message && message.text) {
+                        $("#chat-messages").append(`
+                            <div class='message'>
+                                <span>${message.text}</span>
+                                <span class='time'> ${messageSender} &ndash; ${createdAt}</span>
+                            </div>
+                        `)
+                        $("#message-input").val("");
+                        $("#chat-messages").scrollTop($("#chat-messages")[0].scrollHeight);
+
+                    }
+                });
+                connection.start().catch(err => console.error(err.toString())).then(response => console.log("connected"));
+            };
+            setupConnection();
+
+        });
+
+    function sendMessage() {
+        const message = {
+            CreatedAt: new Date(),
+            SenderUserMail: "@userMail",
+            SenderName: "@userName",
+            Text: document.getElementById("message-input").value
+        }
+
+        if (message.Text !== "") {
+            fetch("/Chat", {
+                method: "POST",
+                body: JSON.stringify(message),
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(response => console.log("message sended: ", message));
+        }
+
+    }
+</script>
+
+
+<div id="chat-box">
+    <div id="chat-button">
+        <i class="fa fa-comment"></i>
+    </div>
+    <div id="chat-container">
+        <div id="chat-header">
+            <span>Mesajlar</span>
+            <div id="close-button">
+                <i class="fa fa-times"></i>
+            </div>
+        </div>
+        <div id="chat-messages"> </div>
+        <div id="chat-input">
+            <input type="text" id="message-input" placeholder="Mesajınızı girin">
+            <button onclick="sendMessage();" id="send-button">Gönder</button>
+        </div>
+    </div>
+</div>
+

@@ -46,6 +46,7 @@ namespace Inveon.Services.Identity.Initializer
                 new Claim(JwtClaimTypes.GivenName,adminUser.FirstName),
                 new Claim(JwtClaimTypes.FamilyName,adminUser.LastName),
                 new Claim(JwtClaimTypes.Role,StaticDefinitions.Admin),
+                new Claim(JwtClaimTypes.Email,adminUser.Email),
             }).Result;
 
             ApplicationUser customerUser = new ApplicationUser()
@@ -66,6 +67,7 @@ namespace Inveon.Services.Identity.Initializer
                 new Claim(JwtClaimTypes.GivenName,customerUser.FirstName),
                 new Claim(JwtClaimTypes.FamilyName,customerUser.LastName),
                 new Claim(JwtClaimTypes.Role,StaticDefinitions.Customer),
+                new Claim(JwtClaimTypes.Email,customerUser.Email),
             }).Result;
         }
     }

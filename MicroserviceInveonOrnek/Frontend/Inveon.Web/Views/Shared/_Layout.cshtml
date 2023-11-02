@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/bootstrap-datetimepicker.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/f18ebfae9b.js" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -41,6 +43,10 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            @if (User.Identity.IsAuthenticated)
+            {
+                <partial name="_ChatArea" />
+            }
         </main>
     </div>
 
