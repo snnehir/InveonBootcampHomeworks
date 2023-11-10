@@ -1,5 +1,4 @@
-﻿using Inveon.Web.Models;
-using Inveon.Web.Services.IServices;
+﻿using Inveon.Web.Models.Dto;
 
 namespace Inveon.Web.Services.Product
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Inveon.Web.Models
+namespace Inveon.Web.Models.Dto
 {
     public class ProductDto
     {

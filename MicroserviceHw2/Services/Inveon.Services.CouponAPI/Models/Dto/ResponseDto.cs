@@ -1,4 +1,4 @@
-﻿namespace Inveon.Web.Models
+﻿namespace Inveon.Services.CouponAPI.Models.Dto
 {
     public class ResponseDto
     {

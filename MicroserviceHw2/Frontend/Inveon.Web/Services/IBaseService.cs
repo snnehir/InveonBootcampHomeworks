@@ -1,6 +1,7 @@
 ﻿using Inveon.Web.Models;
+using Inveon.Web.Models.Dto;
 
-namespace Inveon.Web.Services.IServices
+namespace Inveon.Web.Services
 {
     public interface IBaseService : IDisposable
     {

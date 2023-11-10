@@ -9,13 +9,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{EDA9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8492FEDE-BE5C-4C93-9ECF-8C488B6D4A9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Web", "Frontend\Inveon.Web\Inveon.Web.csproj", "{8C9744F1-5F1B-4C4F-815B-1E70D40507A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.Web", "Frontend\Inveon.Web\Inveon.Web.csproj", "{8C9744F1-5F1B-4C4F-815B-1E70D40507A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.GatewaySolution", "Gateway\Inveon.GatewaySolution\Inveon.GatewaySolution.csproj", "{721F0F7E-8FE1-4F1B-A8C8-083474CD8656}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.GatewaySolution", "Gateway\Inveon.GatewaySolution\Inveon.GatewaySolution.csproj", "{721F0F7E-8FE1-4F1B-A8C8-083474CD8656}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.ProductAPI", "Services\Inveon.Services.ProductAPI\Inveon.Services.ProductAPI.csproj", "{25657D63-5711-4B5B-8CF1-1FB6ABB573AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.Services.ShoppingCartAPI", "Services\Inveon.Services.ShoppingCartAPI\Inveon.Services.ShoppingCartAPI.csproj", "{90A13DF6-F032-47CD-AC84-AF3E3923C614}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.Identity", "Services\Inveon.Services.Identity\Inveon.Services.Identity.csproj", "{42886DCC-A05F-4833-8FA8-85268FF10981}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.Services.Identity", "Services\Inveon.Services.Identity\Inveon.Services.Identity.csproj", "{E33094ED-BBFC-4CF7-B6DB-23C041980317}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.Services.ProductAPI", "Services\Inveon.Services.ProductAPI\Inveon.Services.ProductAPI.csproj", "{D64DF4BF-704B-4A12-BAB4-FEBEC1397AF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{7E9CE4C7-E5CA-4C6F-B097-C936D6D9A7E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.MessageBus", "Integration\Inveon.MessageBus\Inveon.MessageBus.csproj", "{E54DD1D3-ADC7-4730-93AC-A7C2B6595351}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.CouponAPI", "Services\Inveon.Services.CouponAPI\Inveon.Services.CouponAPI.csproj", "{A8922F83-641C-4297-B9B7-764E19029C91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +39,26 @@ Global
 		{721F0F7E-8FE1-4F1B-A8C8-083474CD8656}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{721F0F7E-8FE1-4F1B-A8C8-083474CD8656}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{721F0F7E-8FE1-4F1B-A8C8-083474CD8656}.Release|Any CPU.Build.0 = Release|Any CPU
-		{25657D63-5711-4B5B-8CF1-1FB6ABB573AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{25657D63-5711-4B5B-8CF1-1FB6ABB573AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{25657D63-5711-4B5B-8CF1-1FB6ABB573AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{25657D63-5711-4B5B-8CF1-1FB6ABB573AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42886DCC-A05F-4833-8FA8-85268FF10981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42886DCC-A05F-4833-8FA8-85268FF10981}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42886DCC-A05F-4833-8FA8-85268FF10981}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42886DCC-A05F-4833-8FA8-85268FF10981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90A13DF6-F032-47CD-AC84-AF3E3923C614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90A13DF6-F032-47CD-AC84-AF3E3923C614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90A13DF6-F032-47CD-AC84-AF3E3923C614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90A13DF6-F032-47CD-AC84-AF3E3923C614}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E33094ED-BBFC-4CF7-B6DB-23C041980317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E33094ED-BBFC-4CF7-B6DB-23C041980317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E33094ED-BBFC-4CF7-B6DB-23C041980317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E33094ED-BBFC-4CF7-B6DB-23C041980317}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D64DF4BF-704B-4A12-BAB4-FEBEC1397AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D64DF4BF-704B-4A12-BAB4-FEBEC1397AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D64DF4BF-704B-4A12-BAB4-FEBEC1397AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D64DF4BF-704B-4A12-BAB4-FEBEC1397AF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E54DD1D3-ADC7-4730-93AC-A7C2B6595351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E54DD1D3-ADC7-4730-93AC-A7C2B6595351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E54DD1D3-ADC7-4730-93AC-A7C2B6595351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E54DD1D3-ADC7-4730-93AC-A7C2B6595351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8922F83-641C-4297-B9B7-764E19029C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8922F83-641C-4297-B9B7-764E19029C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8922F83-641C-4297-B9B7-764E19029C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8922F83-641C-4297-B9B7-764E19029C91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,8 +66,11 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8C9744F1-5F1B-4C4F-815B-1E70D40507A4} = {EDED97F6-4B3B-4426-87C8-3E7036D1E7F4}
 		{721F0F7E-8FE1-4F1B-A8C8-083474CD8656} = {EDA9E4C7-A731-4248-AC51-5E59E898CCC2}
-		{25657D63-5711-4B5B-8CF1-1FB6ABB573AA} = {8492FEDE-BE5C-4C93-9ECF-8C488B6D4A9E}
-		{42886DCC-A05F-4833-8FA8-85268FF10981} = {8492FEDE-BE5C-4C93-9ECF-8C488B6D4A9E}
+		{90A13DF6-F032-47CD-AC84-AF3E3923C614} = {8492FEDE-BE5C-4C93-9ECF-8C488B6D4A9E}
+		{E33094ED-BBFC-4CF7-B6DB-23C041980317} = {8492FEDE-BE5C-4C93-9ECF-8C488B6D4A9E}
+		{D64DF4BF-704B-4A12-BAB4-FEBEC1397AF5} = {8492FEDE-BE5C-4C93-9ECF-8C488B6D4A9E}
+		{E54DD1D3-ADC7-4730-93AC-A7C2B6595351} = {7E9CE4C7-E5CA-4C6F-B097-C936D6D9A7E6}
+		{A8922F83-641C-4297-B9B7-764E19029C91} = {8492FEDE-BE5C-4C93-9ECF-8C488B6D4A9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B44D717-C92B-4215-8C1C-0395EDC4B185}
