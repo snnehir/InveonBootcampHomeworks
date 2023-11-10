@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{EDED97F6-4B3B-4426-87C8-3E7036D1E7F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{EDA9E4C7-A731-4248-AC51-5E59E898CCC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{8492FEDE-BE5C-4C93-9ECF-8C488B6D4A9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Web", "Frontend\Inveon.Web\Inveon.Web.csproj", "{8C9744F1-5F1B-4C4F-815B-1E70D40507A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.GatewaySolution", "Gateway\Inveon.GatewaySolution\Inveon.GatewaySolution.csproj", "{721F0F7E-8FE1-4F1B-A8C8-083474CD8656}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.ProductAPI", "Services\Inveon.Services.ProductAPI\Inveon.Services.ProductAPI.csproj", "{25657D63-5711-4B5B-8CF1-1FB6ABB573AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.Identity", "Services\Inveon.Services.Identity\Inveon.Services.Identity.csproj", "{42886DCC-A05F-4833-8FA8-85268FF10981}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C9744F1-5F1B-4C4F-815B-1E70D40507A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C9744F1-5F1B-4C4F-815B-1E70D40507A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C9744F1-5F1B-4C4F-815B-1E70D40507A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C9744F1-5F1B-4C4F-815B-1E70D40507A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{721F0F7E-8FE1-4F1B-A8C8-083474CD8656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{721F0F7E-8FE1-4F1B-A8C8-083474CD8656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{721F0F7E-8FE1-4F1B-A8C8-083474CD8656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{721F0F7E-8FE1-4F1B-A8C8-083474CD8656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25657D63-5711-4B5B-8CF1-1FB6ABB573AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25657D63-5711-4B5B-8CF1-1FB6ABB573AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25657D63-5711-4B5B-8CF1-1FB6ABB573AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25657D63-5711-4B5B-8CF1-1FB6ABB573AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42886DCC-A05F-4833-8FA8-85268FF10981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42886DCC-A05F-4833-8FA8-85268FF10981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42886DCC-A05F-4833-8FA8-85268FF10981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42886DCC-A05F-4833-8FA8-85268FF10981}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C9744F1-5F1B-4C4F-815B-1E70D40507A4} = {EDED97F6-4B3B-4426-87C8-3E7036D1E7F4}
+		{721F0F7E-8FE1-4F1B-A8C8-083474CD8656} = {EDA9E4C7-A731-4248-AC51-5E59E898CCC2}
+		{25657D63-5711-4B5B-8CF1-1FB6ABB573AA} = {8492FEDE-BE5C-4C93-9ECF-8C488B6D4A9E}
+		{42886DCC-A05F-4833-8FA8-85268FF10981} = {8492FEDE-BE5C-4C93-9ECF-8C488B6D4A9E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B44D717-C92B-4215-8C1C-0395EDC4B185}
+	EndGlobalSection
+EndGlobal
