@@ -1,3 +1,11 @@
+# React Search Homework 
+
+### About Homework
+
+Search tutorial items by their titles. (Example data is used since the service gives network error.)
+
+![react-hw-gif](https://github.com/snnehir/InveonBootcampHomeworks/blob/master/ReactHw/react-hw.gif) 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

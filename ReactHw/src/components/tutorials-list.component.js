@@ -22,21 +22,26 @@ export default class TutorialsList extends Component {
 
     tutorialllariGetir() {
         // Network error
-        tutorialService.getAll().then(tutorialListesi => {
-            this.setState({
-                tutorials: tutorialListesi,
-                filteredTutorials: tutorialListesi
-            });
-        }).catch(hata => {
+        // tutorialService.getAll().then(tutorialListesi => {
+        //     this.setState({
+        //         tutorials: tutorialListesi,
+        //         filteredTutorials: tutorialListesi
+        //     });
+        // }).catch(hata => {
 
-            console.log("hata oluştu" + hata);
-        })
+        //     console.log("hata oluştu" + hata);
+        // })
         // example data
-        // let data = [{ title: "todo 1", description: "description 1" }, { title: "todo 2", description: "description 2" }]
-        // this.setState({
-        //     tutorials: data,
-        //     filteredTutorials: data
-        // });
+        let data = [{ title: "todo 1 lorem", description: "description 1" },
+        { title: "todo 2 ipsum", description: "description 2" },
+        { title: "todo 3 dolor", description: "description 3" },
+        { title: "todo 4 sit", description: "description 4" },
+        { title: "todo 5 amet", description: "description 5" }
+        ]
+        this.setState({
+            tutorials: data,
+            filteredTutorials: data
+        });
     }
 
     filterBySearchTerm(input, tutorials) {
