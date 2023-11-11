@@ -74,7 +74,7 @@ namespace Inveon.Service.ShoppingCartAPI.Controllers
             }
             return _response;
         }
-        // 4.43.33 => ÖDEV
+        
         public Payment OdemeIslemi(CheckoutHeaderDto checkoutHeaderDto)
         {
 
