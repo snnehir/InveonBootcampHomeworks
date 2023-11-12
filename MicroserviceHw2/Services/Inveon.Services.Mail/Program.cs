@@ -26,7 +26,7 @@ class Program
         using var channel = connection.CreateModel();
         var queueName = "checkoutqueue";
 
-        channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
+        channel.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
 
         var consumer = new EventingBasicConsumer(channel);
         consumer.Received += (model, ea) =>
