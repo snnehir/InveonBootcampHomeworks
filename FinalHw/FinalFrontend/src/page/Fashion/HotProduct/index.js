@@ -1,83 +1,63 @@
 import Heading from "../Heading"
-import React from "react"
-import {useSelector}  from "react-redux";
-import ProductCard from "../../../components/Common/Product/ProductCard"; 
-const HotProduct = () => {
-     
-         let TumUrunler =  useSelector((state)=> state.products.products);
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import ProductCard from "../../../components/Common/Product/ProductCard";
 
-    return(
+const HotProduct = () => {
+    let allProducts = useSelector((state) => state.products.products);
+    let categories = useSelector((state) => state.products.categories);
+    const getFilteredProducts = (categoryId) => {
+        const filteredProducts = allProducts.filter(p => +p.categoryId === categoryId)
+        return filteredProducts
+    }
+    return (
         <>
-        <section id="hot-Product_area" className="ptb-100">
-             <div className="container">
-                <Heading baslik="Yeni Ürünler" 
-                 altBaslik="Herkesin BT Shop tan Alışveriş Yaptığını Görün" />
-                 <div className="row">
-                  <div className="col-lg-12">
-                    <div className="tabs_center_button">
-                        <ul className="nav nav-tabs">
-                            <li><a data-toggle="tab" href="#new_arrival" className="active">Tam Mevsimi</a></li>
-                            <li><a data-toggle="tab" href="#trending">Gerçek Alman Lezzeti</a></li>
-                            <li><a data-toggle="tab" href="#best_sellers">Dt. Beyza Çulha'nın Tarifleri</a></li>
-                            <li><a data-toggle="tab" href="#featured">İtalyan Şef Lorenzo Mossi</a></li>
-                            <li><a data-toggle="tab" href="#on_sall">Şimdi Mutfakta</a></li>
-                        </ul>
-                    </div>
-                  </div>
-                  <div className="col-lg-12">
-                    <div className="tabs_el_wrapper">
-                        <div className="tab-content">
-                            <div id="new_arrival" className="tab-pane fade show in active">
-                                <div className="row">
-                               {TumUrunler.slice(0,4).map((urun,index)=> (
-                                <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
-                                    <ProductCard data={urun} />
-                                    </div>
-                               ))}
-                               </div>
+            <section id="hot-Product_area" className="ptb-100">
+                <div className="container">
+                    <Heading baslik="Şahane Menümüz"
+                        altBaslik="Kardeşler Pide Kebap Lezzetlerini Görün" />
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="tabs_center_button">
+                                <ul className="nav nav-tabs">
+                                    {categories && categories.map((category, index) => {
+                                        return (
+                                            <li key={index}>
+                                                <a data-toggle="tab" className={index === 0 ? "active" : ""} href={`#${category.categoryName}`}>{category.categoryName}</a>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+
+
                             </div>
-                            <div id="trending" className="tab-pane fade">
-                            <div className="row">
-                               {TumUrunler.slice(3,5).map((urun, index)=> (
-                                <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
-                                    <ProductCard data={urun} />
-                                    </div>
-                               ))}
-                               </div>
-                            </div>
-                            <div id="best_sellers" className="tab-pane fade">
-                            <div className="row">
-                               {TumUrunler.slice(4,7).map((urun,index)=> (
-                                <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
-                                    <ProductCard data={urun} />
-                                    </div>
-                               ))}
-                               </div>
-                            </div>
-                            <div id="featured" className="tab-pane fade">
-                            <div className="row">
-                               {TumUrunler.slice(5,9).map((urun,index)=> (
-                                <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
-                                    <ProductCard data={urun} />
-                                    </div>
-                               ))}
-                               </div>
-                            </div>
-                            <div id="on_sall" className="tab-pane fade">
-                            <div className="row">
-                               {TumUrunler.slice(2,7).map((urun,index)=> (
-                                <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
-                                    <ProductCard data={urun} />
-                                    </div>
-                               ))}
-                               </div>
+                        </div>
+                        <div className="col-lg-12">
+                            <div className="tabs_el_wrapper">
+                                <div className="tab-content">
+                                    {categories.map((category, index) => {
+                                        return (
+                                            <div key={index} id={`${category.categoryName}`} className={index === 0 ? "tab-pane fade show in active" : "tab-pane fade"}>
+                                                <div className="row">
+                                                    {getFilteredProducts(category.categoryId).map((urun, index) => (
+                                                        <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
+                                                            <ProductCard data={urun} />
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                        )
+                                    })}
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                  </div>
-                 </div>
-             </div>
-        </section>
+
+
+                </div>
+            </section>
         </>
     )
 }

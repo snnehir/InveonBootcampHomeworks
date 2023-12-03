@@ -1,6 +1,6 @@
 import React from 'react'
-import {Link} from "react-router-dom";
-const YourOrder = () => {
+import { Link } from "react-router-dom";
+const YourOrder = (props) => {
     return (
         <>
             <div className="col-lg-6 col-md-6">
@@ -10,37 +10,45 @@ const YourOrder = () => {
                         <thead>
                             <tr>
                                 <th>Ürün</th>
+                                <th>Adet</th>
                                 <th>Toplam</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td> green Dress For Woman <strong> × 1</strong></td>
-                                <td> 100.00 TL</td>
-                            </tr>
-                            <tr>
-                                <td> V-Neck Dress <strong> × 1</strong></td>
-                                <td> 50.00 TL</td>
-                            </tr>
-                          
+                            {props.carts && props.carts.cartDetails.map((detail, index) => (
+
+                                <tr key={index}>
+                                    <td> {detail.product.name}</td>
+                                    <td> {detail.count}</td>
+                                    <td> {detail.product.price} TL</td>
+                                </tr>
+                            ))
+                            }
+
+
+
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <th>Alt Toplam</th>
-                                <td>150.00 TL</td>
-                            </tr>
-                            <tr>
-                                <th>Kargo</th>
-                                <td><strong>15.00 TL</strong></td>
-                            </tr>
+                            {props.carts && props.carts.cartHeader.discountTotal > 0 &&
+                                <>
+                                    <tr>
+                                        <th>Alt Toplam</th>
+                                        <td>{props.carts.cartHeader.discountTotal + props.carts.cartHeader.orderTotal}TL</td>
+                                    </tr>
+                                    <tr>
+                                        <th>İndirim</th>
+                                        <td><strong>{props.carts.cartHeader.discountTotal} TL</strong></td>
+                                    </tr>
+                                </>
+                            }
                             <tr className="order_total">
                                 <th>Sipariş Toplamı </th>
-                                <td><strong>165.00 TL</strong></td>
+                                <td><strong>{props.carts.cartHeader.orderTotal} TL</strong></td>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
-                <div className="payment_method">
+                {/* <div className="payment_method">
                     <form>
                         <div className="accordion" id="accordionExample">
                             <div className="payment_area_wrappers">
@@ -86,11 +94,11 @@ const YourOrder = () => {
                     </form>
 
                     <div className="order_button pt-3">
-        
+
                         <Link to="/order-complete" className="theme-btn-one btn-black-overlay btn_sm">
-                                Sipariş Ver</Link>
+                            Sipariş Ver</Link>
                     </div>
-                </div>
+                </div> */}
             </div>
         </>
     )

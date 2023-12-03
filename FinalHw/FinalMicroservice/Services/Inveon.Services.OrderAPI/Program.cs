@@ -1,3 +1,5 @@
+using AutoMapper;
+using Inveon.Services.OrderAPI;
 using Inveon.Services.OrderAPI.DbContexts;
 using Inveon.Services.OrderAPI.Messaging;
 using Inveon.Services.OrderAPI.RabbitMQSender;
@@ -18,8 +20,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 			   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-//IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-//services.AddSingleton(mapper);
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
@@ -56,7 +58,7 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddSwaggerGen(c =>
 {
-	c.SwaggerDoc("v1", new OpenApiInfo { Title = "Inveon.Services.CouponAPI", Version = "v1" });
+	c.SwaggerDoc("v1", new OpenApiInfo { Title = "Inveon.Services.OrderAPI", Version = "v1" });
 	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{
 		Description = @"Enter 'Bearer' [space] and your token",

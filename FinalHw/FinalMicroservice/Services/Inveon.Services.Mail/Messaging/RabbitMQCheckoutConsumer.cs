@@ -24,7 +24,7 @@ namespace Inveon.Services.OrderAPI.Messaging
 
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
-            _channel.QueueDeclare(queue: "checkoutqueue", false, false, false, arguments: null);
+            _channel.QueueDeclare(queue: "orderMailqueue", false, false, false, arguments: null);
         }
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -45,11 +45,11 @@ namespace Inveon.Services.OrderAPI.Messaging
 					SendEmail(mailContent);
 				}
 
-				// _channel.BasicAck(ea.DeliveryTag, false);
+				_channel.BasicAck(ea.DeliveryTag, false);
 			};
 
-			_channel.BasicConsume(queue: "checkoutqueue", autoAck: true, consumer: consumer);
-			
+			_channel.BasicConsume("orderMailqueue", false, consumer); 
+
 			return Task.CompletedTask;
         }
 
@@ -71,12 +71,11 @@ namespace Inveon.Services.OrderAPI.Messaging
 				$"\nSipariş durumunu websitemizden takip edebilirsiniz.\n\nBizi tercih ettiğiniz için teşekkürler. :)"
 			};
 
-			/*using var client = new MailKit.Net.Smtp.SmtpClient();
+			using var client = new MailKit.Net.Smtp.SmtpClient();
 			client.Connect(StaticDefinitions.Host, 587, false);
 			client.Authenticate(StaticDefinitions.MailSenderAddress, StaticDefinitions.MailSenderPassword);
 			client.Send(emailMessage);
-			client.Disconnect(true);
-			*/
+			client.Disconnect(true);		
 		}
 	}
 }

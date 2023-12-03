@@ -12,7 +12,8 @@
     }
 
     #banner_one {
-        padding: 150px 0;
+        /* padding: 150px 0; */
+        height: 100vh;
         background-position: center;
     }
 
@@ -403,7 +404,8 @@
     }
 
     #banner_one {
-        padding: 150px 0;
+        /* padding: 150px 0; */
+        height: 100vh;
         background-position: 79%;
     }
 

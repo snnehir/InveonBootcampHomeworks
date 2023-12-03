@@ -56,17 +56,21 @@ namespace Inveon.Services.ProductAPI.Repository
             }
         }
 
-        public async Task<ProductDto> GetProductById(int productId)
+		public async Task<IEnumerable<CategoryDto>> GetCategories()
+		{
+			List<Category> categoryList = await _db.Categories.ToListAsync();
+			return _mapper.Map<List<CategoryDto>>(categoryList);
+		}
+        // TODO: Pagination
+		public async Task<ProductDto> GetProductById(int productId)
         {
-            //linq select * from Product where Id=productId
-            //{Id:1,Name : Product1}
-            Product product = await _db.Products.Where(x => x.ProductId == productId).FirstOrDefaultAsync();
+            Product product = await _db.Products.Include(p => p.Category).FirstOrDefaultAsync(x => x.ProductId == productId);
             return _mapper.Map<ProductDto>(product);
         }
 
         public async Task<IEnumerable<ProductDto>> GetProducts()
         {
-            List<Product> productList = await _db.Products.ToListAsync();
+            List<Product> productList = await _db.Products.Include(p => p.Category).ToListAsync();
             return _mapper.Map<List<ProductDto>>(productList);
         }
     }

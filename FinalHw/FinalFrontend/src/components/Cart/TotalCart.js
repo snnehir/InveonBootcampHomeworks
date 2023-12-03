@@ -6,8 +6,9 @@ const TotalCart = (props) => {
     let carts = useSelector((state) => state.products.carts);
 
     const cartTotal = () => {
-        return carts.reduce(function (total, item) {
-            return total + ((item.quantity || 1) * item.price)
+
+        return carts.cartDetails.reduce(function (total, item) {
+            return total + ((item.count || 1) * item.product.price)
         }, 0)
     }
     return (
@@ -17,19 +18,21 @@ const TotalCart = (props) => {
                     <div className="coupon_code right">
                         <h3>Toplam : </h3>
                         <div className="coupon_inner">
-                            <div className="cart_subtotal">
-                                <p>Alt Toplam : </p>
-                                <p className="cart_amount">${cartTotal()}.00</p>
-                            </div>
-                            <div className="cart_subtotal ">
-                                <p>Kargo</p>
-                                <p className="cart_amount"><span>Sabit Fiyat</span> 00 TL</p>
-                            </div>
-                            <a href="#!">Kargo Hesapla</a>
-
+                            {carts.cartHeader.discountTotal > 0 &&
+                                <>
+                                    <div className="cart_subtotal">
+                                        <p>Ara Toplam</p>
+                                        <p className="cart_amount"> {cartTotal()}TL</p>
+                                    </div>
+                                    <div className="cart_subtotal">
+                                        <p>İndirim</p>
+                                        <p className="cart_amount"> {carts.cartHeader.discountTotal}TL</p>
+                                    </div>
+                                </>
+                            }
                             <div className="cart_subtotal">
                                 <p>Toplam</p>
-                                <p className="cart_amount">${cartTotal()}.00</p>
+                                <p className="cart_amount"> {carts.cartHeader.orderTotal}TL</p>
                             </div>
                             <div className="checkout_btn">
 
@@ -42,22 +45,24 @@ const TotalCart = (props) => {
                 </div>
             ) : (
                 <div className="col-lg-6 col-md-6">
-                       <div className="coupon_code right">
+                    <div className="coupon_code right">
                         <h3>Toplam : </h3>
                         <div className="coupon_inner">
-                            <div className="cart_subtotal">
-                                <p>Alt Toplam : </p>
-                                <p className="cart_amount">{cartTotal()}.00 TL</p>
-                            </div>
-                            <div className="cart_subtotal ">
-                                <p>Kargo</p>
-                                <p className="cart_amount"><span>Sabit Fiyat</span> 00 TL</p>
-                            </div>
-                            <a href="#!">Kargo Hesapla</a>
-
+                            {carts.cartHeader.discountTotal > 0 &&
+                                <>
+                                    <div className="cart_subtotal">
+                                        <p>Ara Toplam</p>
+                                        <p className="cart_amount">{cartTotal()}TL</p>
+                                    </div>
+                                    <div className="cart_subtotal">
+                                        <p>İndirim</p>
+                                        <p className="cart_amount">{carts.cartHeader.discountTotal}TL</p>
+                                    </div>
+                                </>
+                            }
                             <div className="cart_subtotal">
                                 <p>Toplam</p>
-                                <p className="cart_amount">{cartTotal()}.00 TL</p>
+                                <p className="cart_amount"> {carts.cartHeader.orderTotal}TL</p>
                             </div>
                             <div className="checkout_btn">
 

@@ -76,8 +76,8 @@ namespace Inveon.Web.Services.Cart
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = StaticDefinitions.ApiType.POST,
-                Data = cartId,
-                Url = StaticDefinitions.ShoppingCartAPIBase + "/api/cart/RemoveCart",
+                //Data = cartId,
+                Url = StaticDefinitions.ShoppingCartAPIBase + "/api/cart/RemoveCart/" + cartId,
                 AccessToken = token
             });
         }

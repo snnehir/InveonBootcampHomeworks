@@ -308,7 +308,8 @@ ul li {
 }
 
 #common_banner_one {
-    background-image: url('../img/common/common_bg.jpg');
+    /* background-image: url('../img/common/common_bg.jpg'); */
+    background-color: #2b2b2b;
     padding: 90px 0;
     background-repeat: no-repeat;
 }
@@ -2011,8 +2012,9 @@ button {
 ---------------------------*/
 
 #banner_one {
-    background-image: url('../img/common/banner_3.jpg');
-    padding: 200px 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('../img/common/banner.jpg');
+    /* padding: 200px 0; */
+    height: 85vh;
     display: flex;
     align-items: center;
     background-size: cover;
@@ -2022,11 +2024,12 @@ button {
 }
 
 .banner_text_one h1 {
-    font-size: 150px;
+    font-size: 4em;
     text-transform: uppercase;
-    font-weight: 100;
-    color: #aeaaa7;
-    line-height: 150px;
+    font-weight: 200;
+    color: #fff;
+    text-shadow: 2px 2px 8px #212121;
+    /* line-height: 100px; */
 }
 
 .banner_text_one h3 {
@@ -2036,13 +2039,20 @@ button {
 }
 
 .banner_text_one a {
+    font-weight: bold;
     margin-top: 30px;
+    background-color: #f79837;
+}
+
+.banner_text_one a:hover {
+    background-color: #fff;
 }
 
 .banner_text_one h1 span {
     display: block;
     color: #fff;
-    font-weight: 700;
+    font-weight: 500;
+    font-size: larger;
 }
 
 .hero_img img {
@@ -2104,7 +2114,7 @@ button {
 .product_var_one_text h4,
 .product_var_one_text_center h4 {
     text-transform: uppercase;
-    color:rgb(10, 124, 1)
+    color: rgb(10, 124, 1)
 }
 
 .product_var_one_text a,
@@ -2117,15 +2127,15 @@ button {
 }
 
 .color_two {
-    color:orangered
+    color: orangered
 }
 
 .color_three {
-    color:tomato
+    color: tomato
 }
 
 .color_four {
-    color:limegreen
+    color: limegreen
 }
 
 .product_var_two_text_center {
@@ -2155,13 +2165,13 @@ button {
     padding: 5px 0;
     text-transform: uppercase;
     font-weight: 700;
-    color:#ff365d
+    color: #ff365d
 }
 
 .product_var_two_text h4,
 .product_var_two_text_center h4 {
     text-transform: uppercase;
-    color:rgb(118, 64, 2)
+    color: rgb(118, 64, 2)
 }
 
 .product_var_two_text a,
@@ -2294,8 +2304,8 @@ button {
 .product_wrappers_one .thumb .badges {
     position: absolute;
     z-index: 8;
-    top: 18px;
-    left: 18px;
+    top: 0px;
+    left: 0px;
     display: flex;
     flex-direction: column;
 }
@@ -2310,6 +2320,7 @@ button {
     text-transform: capitalize;
     border-radius: 3px;
     color: #fff;
+    background-color: #000000a6;
 }
 
 .product_wrappers_one .thumb .badges span+span {
@@ -2331,8 +2342,8 @@ button {
 .product_wrappers_one .thumb .actions {
     position: absolute;
     z-index: 9;
-    top: 18px;
-    right: 18px;
+    top: 10px;
+    right: 10px;
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease 0s;
@@ -7685,7 +7696,7 @@ table {
     right: 25px;
     color: #ffffff;
     background-color: var(--main-theme-color);
-    z-index: 4;
+    z-index: 14;
     width: 40px;
     text-align: center;
     height: 40px;

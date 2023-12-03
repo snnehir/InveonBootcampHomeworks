@@ -53,8 +53,24 @@ namespace Inveon.Services.ProductAPI.Controllers
             return _response;
         }
 
+		[HttpGet("categories")]
+		public async Task<object> GetCategories()
+		{
+			try
+			{
+				IEnumerable<CategoryDto> categoryDtos = await _productRepository.GetCategories();
+				_response.Result = categoryDtos;
+			}
+			catch (Exception ex)
+			{
+				_response.IsSuccess = false;
+				_response.ErrorMessages
+					 = new List<string>() { ex.ToString() };
+			}
+			return _response;
+		}
 
-        [HttpPost]
+		[HttpPost]
         [Authorize]
         public async Task<object> Post([FromBody] ProductDto productDto)
         {

@@ -20,6 +20,10 @@ namespace Inveon.Services.ShoppingCartAPI.Repository
         public async Task<bool> ApplyCoupon(string userId, string couponCode)
         {
             var cartFromDb = await _db.CartHeaders.FirstOrDefaultAsync(u => u.UserId == userId);
+            if(cartFromDb == null)
+            {
+                return false;
+            }
             cartFromDb.CouponCode = couponCode;
             _db.CartHeaders.Update(cartFromDb);
             await _db.SaveChangesAsync();
@@ -113,6 +117,10 @@ namespace Inveon.Services.ShoppingCartAPI.Repository
 
             cart.CartDetails = _db.CartDetails
                 .Where(u => u.CartHeaderId == cart.CartHeader.CartHeaderId).Include(u => u.Product);
+            if(cart.CartHeader ==  null)
+            {
+                throw new Exception("Shopping cart for given user id is not found.");
+            }
             var cartDto = _mapper.Map<CartDto>(cart);
             return cartDto;
         }
@@ -142,9 +150,7 @@ namespace Inveon.Services.ShoppingCartAPI.Repository
 
         public async Task<bool> RemoveFromCart(int cartDetailsId)
         {
-            try
-            {
-                CartDetails cartDetails = await _db.CartDetails
+           CartDetails cartDetails = await _db.CartDetails
                     .FirstOrDefaultAsync(u => u.CartDetailsId == cartDetailsId);
 
                 int totalCountOfCartItems = _db.CartDetails
@@ -160,11 +166,8 @@ namespace Inveon.Services.ShoppingCartAPI.Repository
                 }
                 await _db.SaveChangesAsync();
                 return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+            
+          
         }
     }
 }

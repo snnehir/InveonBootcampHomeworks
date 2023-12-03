@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.2",
     "bootstrap": "^5.2.1",
+    "moment": "^2.29.4",
     "oidc-client": "^1.11.5",
     "p-min-delay": "^4.0.1",
     "rating-star": "^1.1.0",

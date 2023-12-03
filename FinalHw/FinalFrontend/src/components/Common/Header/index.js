@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from "../../../assets/img/logo.png"
 import { Link } from "react-router-dom";
 import { MenuData } from "./MenuData";
@@ -9,15 +9,34 @@ import svg from '../../../assets/img/svg/cancel.svg'
 import logoWhite from '../../../assets/img/logo-white.png'
 import svgsearch from '../../../assets/img/svg/search.svg'
 import Swal from 'sweetalert2'
+import { deleteProductFromCart, getAllProducts, getCategories, getUserCart, getUserFavorites, getUserOrders } from '../../../app/Actions/Index';
+import userManager from '../../../app/UserManager';
 const Header = () => {
+
+
     let carts = useSelector((state) => state.products.carts);
+
     let favorites = useSelector((state) => state.products.favorites);
     const [click, setClick] = useState(false);
     const history = useNavigate();
     let dispatch = useDispatch();
 
+    let status = useSelector((state) => state.user.status)
+    let user = useSelector((state) => state.user.user);
+
+    useEffect(() => {
+        dispatch(getAllProducts());
+        dispatch(getCategories());
+        if (status && user) {
+            dispatch(getUserFavorites(user.user_id));
+            dispatch(getUserCart(user.user_id));
+            dispatch(getUserOrders(user.user_id));
+        }
+
+    }, [dispatch]);
+
     const rmCartProduct = (id) => {
-        dispatch({ type: "products/removeCart", payload: { id } });
+        dispatch(deleteProductFromCart(id));
     }
 
     const rmFavProduct = (id) => {
@@ -25,19 +44,49 @@ const Header = () => {
     }
 
     const cartTotal = () => {
-        return carts.reduce(function (total, item) {
-            return total + ((item.quantity || 1) * item.price)
-        }, 0)
+
+        if (carts && carts.cartHeader) {
+
+            return carts.cartHeader.orderTotal
+        }
+        return 0
     }
 
-    const handleClick = () => {
-        if (click) {
+    const login = () => {
+        userManager.signinRedirect({
+            data: { path: "/" },
+        });
+    };
 
-            document.querySelector("#offcanvas-add-cart").style = ("transform: translateX(100%);")
+    const handleClick = () => {
+        if (status && user) {
+            if (click) {
+
+                document.querySelector("#offcanvas-add-cart").style = ("transform: translateX(100%);")
+            } else {
+                document.querySelector("#offcanvas-add-cart").style = ("transform: translateX(0%);")
+            }
+            setClick(!click);
         } else {
-            document.querySelector("#offcanvas-add-cart").style = ("transform: translateX(0%);")
+            Swal.fire({
+                title: "Oturum Açmadınız",
+                text: "Sepetinizi görüntülemek için giriş yapmalısınız.",
+                showCancelButton: true,
+                confirmButtonText: 'Giriş Yap',
+                cancelButtonText: "İptal",
+                customClass: {
+                    actions: 'my-actions',
+                    cancelButton: 'order-1 right-gap',
+                    confirmButton: 'order-2',
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    login()
+                }
+            })
         }
-        setClick(!click);
+
+
     }
     const handleWish = () => {
         if (click) {
@@ -92,9 +141,14 @@ const Header = () => {
                                         <nav>
                                             <ul>
                                                 {/* MenuData nın içindeki her bir json objesi için li oluşturulur */}
-                                                {MenuData.map((item, index) => (
-                                                    <NaveItems item={item} key={index} />
-                                                ))}
+                                                {MenuData.map((item, index) => {
+                                                    if (!item.isAuthRequired || status) {
+                                                        return <NaveItems item={item} key={index} />
+                                                    }
+
+                                                }
+
+                                                )}
                                             </ul>
                                         </nav>
                                     </div>
@@ -111,15 +165,10 @@ const Header = () => {
                                             }
                                         </li>
                                         <li>
-                                            {carts.length
-                                                ? <a href="#!" className="offcanvas-toggle"
-                                                    onClick={handleClick}>
-                                                    <i className="fa fa-shopping-bag"></i>
-                                                    <span className="item-count">{carts.length}</span></a>
-                                                : <a href="#!" className="offcanvas-toggle">
-                                                    <i className="fa fa-shopping-bag">
-                                                    </i><span className="item-count">{carts.length}</span></a>
-                                            }
+                                            <a href="#!" className="offcanvas-toggle"
+                                                onClick={handleClick}>
+                                                <i className="fa fa-shopping-bag"></i>
+                                                <span className="item-count">{carts ? carts.cartDetails.length : 0}</span></a>
                                         </li>
                                         <li>
                                             <a href="#search" className="search_width" onClick={handleSearch} >
@@ -177,14 +226,10 @@ const Header = () => {
                                         }
                                     </li>
                                     <li>
-                                        {carts.length
-                                            ? <a href="#!" className="offcanvas-toggle" onClick={handleClick}>
-                                                <i className="fa fa-shopping-bag"></i>
-                                                <span className="item-count">{carts.length}</span></a>
-                                            : <a href="#!" className="offcanvas-toggle">
-                                                <i className="fa fa-shopping-bag">
-                                                </i><span className="item-count">{carts.length}</span></a>
-                                        }
+                                        <a href="#!" className="offcanvas-toggle" onClick={handleClick}>
+                                            <i className="fa fa-shopping-bag"></i>
+                                            <span className="item-count">{carts ? carts.cartDetails.length : 0}</span></a>
+
                                     </li>
                                     <li>
                                         <a href="#!" className="offcanvas-toggle offside-menu"
@@ -292,37 +337,51 @@ const Header = () => {
                 <div className="offcanvas-add-cart-wrapper">
                     <h4 className="offcanvas-title">Alışveriş Sepeti</h4>
                     <ul className="offcanvas-cart">
-                        {carts.map((data, index) => (
+                        {carts && carts.cartDetails && carts.cartDetails.map((data, index) => (
                             <li className="offcanvas-wishlist-item-single" key={index}>
                                 <div className="offcanvas-wishlist-item-block">
-                                    <Link to={`/product-details-two/${data.id}`}
+                                    <Link to={`/product-details-two/${data.product.productId}`}
                                         className="offcanvas-wishlist-item-image-link" >
-                                        <img src={data.img} alt="img"
+                                        <img src={data.product.imageUrl} alt="img"
                                             className="offcanvas-wishlist-image" />
                                     </Link>
                                     <div className="offcanvas-wishlist-item-content">
-                                        <Link to={`/product-details-two/${data.id}`}
-                                            className="offcanvas-wishlist-item-link">{data.title}</Link>
+                                        <Link to={`/product-details-two/${data.product.productId}`}
+                                            className="offcanvas-wishlist-item-link">{data.product.name}</Link>
                                         <div className="offcanvas-wishlist-item-details">
                                             <span className="offcanvas-wishlist-item-details-quantity">
-                                                {data.quantity || 1} x
+                                                {data.count || 1} x
                                             </span>
                                             <span className="offcanvas-wishlist-item-details-price">
-                                                {data.price} TL</span>
+                                                {data.product.price} TL</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="offcanvas-wishlist-item-delete text-right">
                                     <a href="#!" className="offcanvas-wishlist-item-delete"
-                                        onClick={() => rmCartProduct(data.id)}>
+                                        onClick={() => rmCartProduct(data.cartDetailsId)}>
                                         <i className="fa fa-trash"></i></a>
                                 </div>
                             </li>
                         ))}
                     </ul>
+                    {carts && carts.cartHeader && carts.cartHeader.discountTotal > 0 &&
+                        <>
+                            <div className="offcanvas-cart-total-price">
+                                <span className="offcanvas-cart-total-price-text">Ara Toplam :</span>
+                                <span className="offcanvas-cart-total-price-value">{carts.cartHeader.orderTotal + carts.cartHeader.discountTotal} TL</span>
+                            </div>
+                            <div className="offcanvas-cart-total-price">
+                                <span className="offcanvas-cart-total-price-text">İndirim :</span>
+                                <span className="offcanvas-cart-total-price-value">{carts.cartHeader.discountTotal} TL</span>
+                            </div>
+                        </>
+
+                    }
+
                     <div className="offcanvas-cart-total-price">
                         <span className="offcanvas-cart-total-price-text">Toplam :</span>
-                        <span className="offcanvas-cart-total-price-value">{cartTotal()}.00 TL</span>
+                        <span className="offcanvas-cart-total-price-value">{cartTotal()} TL</span>
                     </div>
                     <ul className="offcanvas-cart-action-button">
                         <li>

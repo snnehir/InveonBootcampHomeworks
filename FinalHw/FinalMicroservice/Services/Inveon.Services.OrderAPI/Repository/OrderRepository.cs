@@ -1,5 +1,7 @@
-﻿using Inveon.Services.OrderAPI.DbContexts;
+﻿using AutoMapper;
+using Inveon.Services.OrderAPI.DbContexts;
 using Inveon.Services.OrderAPI.Models;
+using Inveon.Services.OrderAPI.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace Inveon.Services.OrderAPI.Repository
@@ -8,13 +10,21 @@ namespace Inveon.Services.OrderAPI.Repository
     public class OrderRepository : IOrderRepository
     {
         private readonly DbContextOptions<ApplicationDbContext> _dbContext;
+		private IMapper _mapper;
+		
 
-        public OrderRepository(DbContextOptions<ApplicationDbContext> dbContext)
+		public OrderRepository(DbContextOptions<ApplicationDbContext> dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
-        public async Task<bool> AddOrder(OrderHeader orderHeader)
+		public OrderRepository(DbContextOptions<ApplicationDbContext> options)
+		{
+			_dbContext = options;
+		}
+
+		public async Task<bool> AddOrder(OrderHeader orderHeader)
         {
             if (orderHeader.CouponCode == null)
             {
@@ -36,5 +46,12 @@ namespace Inveon.Services.OrderAPI.Repository
                 await _db.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<OrderHeaderDto>> GetOrdersByUserId(string userId)
+        {
+			await using var _db = new ApplicationDbContext(_dbContext);
+			var orderHeaders = await _db.OrderHeaders.Where(u => u.UserId.Equals(userId)).ToListAsync();
+            return _mapper.Map<List<OrderHeaderDto>>(orderHeaders);
+		}
     }
 }

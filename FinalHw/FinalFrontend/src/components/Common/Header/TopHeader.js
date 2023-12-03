@@ -15,7 +15,6 @@ const TopHeader = (props) => {
     let user = useSelector((state) => state.user.user);
 
     const logout = () => {
-        // userManager.signoutRedirect();
 
         userManager.signoutRedirect({ 'id_token_hint': user.id_token });
         userManager.removeUser();
@@ -24,7 +23,7 @@ const TopHeader = (props) => {
     }
 
     const login = () => {
-        // pass the current path to redirect to the correct page after successfull login
+
         userManager.signinRedirect({
             data: { path: "/" },
         });

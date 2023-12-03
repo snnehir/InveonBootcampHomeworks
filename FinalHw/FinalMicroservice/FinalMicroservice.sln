@@ -5,29 +5,31 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{1623CD62-909F-4940-8032-6AC61404A4CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Web", "Frontend\Inveon.Web\Inveon.Web.csproj", "{B35361CC-025A-4B46-B477-01358E19384C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.Web", "Frontend\Inveon.Web\Inveon.Web.csproj", "{B35361CC-025A-4B46-B477-01358E19384C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{27F338AC-122B-4072-B942-5EED4FECA7DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.GatewaySolution", "Gateway\Inveon.GatewaySolution\Inveon.GatewaySolution.csproj", "{D8608066-7D13-46DB-B950-CE946CC20A1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.GatewaySolution", "Gateway\Inveon.GatewaySolution\Inveon.GatewaySolution.csproj", "{D8608066-7D13-46DB-B950-CE946CC20A1B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{7EB5E63D-D8BA-4E63-960A-C4BC57D01275}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.MessageBus", "Integration\Inveon.MessageBus\Inveon.MessageBus.csproj", "{37A2DD03-5C51-44D8-9871-B3EBC1151657}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.MessageBus", "Integration\Inveon.MessageBus\Inveon.MessageBus.csproj", "{37A2DD03-5C51-44D8-9871-B3EBC1151657}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{DAC19929-0F13-463B-A71B-4CDE4540073C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.CouponAPI", "Services\Inveon.Services.CouponAPI\Inveon.Services.CouponAPI.csproj", "{064DBD56-700C-43A7-88F1-A081D9B76D64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.Services.CouponAPI", "Services\Inveon.Services.CouponAPI\Inveon.Services.CouponAPI.csproj", "{064DBD56-700C-43A7-88F1-A081D9B76D64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.Identiy", "Services\Inveon.Services.Identiy\Inveon.Services.Identiy.csproj", "{23E073E9-1E8F-4F0A-8CB6-756C3FE7FD19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.Services.Identiy", "Services\Inveon.Services.Identiy\Inveon.Services.Identiy.csproj", "{23E073E9-1E8F-4F0A-8CB6-756C3FE7FD19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.ProductAPI", "Services\Inveon.Services.ProductAPI\Inveon.Services.ProductAPI.csproj", "{2D3C0572-7775-4C45-9BE9-075E03C9C4A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.Services.ProductAPI", "Services\Inveon.Services.ProductAPI\Inveon.Services.ProductAPI.csproj", "{2D3C0572-7775-4C45-9BE9-075E03C9C4A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.ShoppingCartAPI", "Services\Inveon.Services.ShoppingCartAPI\Inveon.Services.ShoppingCartAPI.csproj", "{2CA71D6E-9D87-4039-945A-BAE836AB1109}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.Services.ShoppingCartAPI", "Services\Inveon.Services.ShoppingCartAPI\Inveon.Services.ShoppingCartAPI.csproj", "{2CA71D6E-9D87-4039-945A-BAE836AB1109}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.OrderAPI", "Services\Inveon.Services.OrderAPI\Inveon.Services.OrderAPI.csproj", "{87B93E21-D928-4281-AF38-FDA51B19CFCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.Services.OrderAPI", "Services\Inveon.Services.OrderAPI\Inveon.Services.OrderAPI.csproj", "{87B93E21-D928-4281-AF38-FDA51B19CFCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.Mail", "Services\Inveon.Services.Mail\Inveon.Services.Mail.csproj", "{1F00BAD7-BD11-4D3E-A17C-009BE17CF6BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inveon.Services.Mail", "Services\Inveon.Services.Mail\Inveon.Services.Mail.csproj", "{1F00BAD7-BD11-4D3E-A17C-009BE17CF6BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inveon.Services.FavoriteAPI", "Services\Inveon.Services.FavoriteAPI\Inveon.Services.FavoriteAPI.csproj", "{1E8A12CD-00BA-4DC3-ABB7-838168A50263}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{1F00BAD7-BD11-4D3E-A17C-009BE17CF6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F00BAD7-BD11-4D3E-A17C-009BE17CF6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F00BAD7-BD11-4D3E-A17C-009BE17CF6BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E8A12CD-00BA-4DC3-ABB7-838168A50263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E8A12CD-00BA-4DC3-ABB7-838168A50263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E8A12CD-00BA-4DC3-ABB7-838168A50263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E8A12CD-00BA-4DC3-ABB7-838168A50263}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{2CA71D6E-9D87-4039-945A-BAE836AB1109} = {DAC19929-0F13-463B-A71B-4CDE4540073C}
 		{87B93E21-D928-4281-AF38-FDA51B19CFCE} = {DAC19929-0F13-463B-A71B-4CDE4540073C}
 		{1F00BAD7-BD11-4D3E-A17C-009BE17CF6BE} = {DAC19929-0F13-463B-A71B-4CDE4540073C}
+		{1E8A12CD-00BA-4DC3-ABB7-838168A50263} = {DAC19929-0F13-463B-A71B-4CDE4540073C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84FAE3D5-6D29-479D-9FD1-BEFB2A710677}

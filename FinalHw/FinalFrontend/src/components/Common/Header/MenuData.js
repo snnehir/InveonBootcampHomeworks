@@ -1,43 +1,47 @@
 export const MenuData = [
     {
-        name :"Kategoriler",
-        href:"#!",
-        children : [
+        name: "Kategoriler",
+        href: "#!",
+        children: [
             {
-                name : "Filtrele",
-                href :"/shop/shop-left-sidebar"
+                name: "Filtrele",
+                href: "/shop/shop-left-sidebar"
             },
-            
-        ]
+
+        ],
+        isAuthRequired: false
     },
     {
-        name :"Hakkımızda",
-        href:"#!",
-        children : [
+        name: "Hakkımızda",
+        href: "#!",
+        children: [
             {
-                name : "Biz Kimiz",
-                href :"/about"
+                name: "Biz Kimiz",
+                href: "/about"
             }
-        ]
+        ],
+        isAuthRequired: false
     },
     {
-        name :"Bize Ulaşın",
-        href:"#!",
-        children : [
+        name: "Bize Ulaşın",
+        href: "#!",
+        children: [
             {
-                name : "Adresimiz",
-                href :"/contact"
+                name: "Adresimiz",
+                href: "/contact"
             }
-        ]
+        ],
+        isAuthRequired: false
     },
     {
-        name :"Hesabım",
-        href:"#!",
-        children : [
+        name: "Hesabım",
+        href: "#!",
+        children: [
             {
-                name : "Siparişlerim",
-                href :"/my-account/customer-order"
+                name: "Siparişlerim",
+                href: "/my-account/customer-order"
             }
-        ]
+        ],
+        isAuthRequired: true
     }
 ]

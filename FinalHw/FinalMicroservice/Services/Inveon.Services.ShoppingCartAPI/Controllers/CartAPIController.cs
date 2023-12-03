@@ -53,7 +53,7 @@ namespace Inveon.Services.ShoppingCartAPI.Controllers
             {
                 if (cartDto.CartHeader.CouponCode == null)
                 {
-                    cartDto.CartHeader.CouponCode = ""; //
+                    cartDto.CartHeader.CouponCode = ""; 
                 }
                 CartDto model = await _cartRepository.CreateUpdateCart(cartDto);
                 _response.Result = model;
@@ -83,8 +83,8 @@ namespace Inveon.Services.ShoppingCartAPI.Controllers
             return _response;
         }
 
-        [HttpPost("RemoveCart")]
-        public async Task<object> RemoveCart([FromBody] int cartId)
+        [HttpPost("RemoveCart/{cartId}")]
+        public async Task<object> RemoveCart(int cartId)
         {
             try
             {

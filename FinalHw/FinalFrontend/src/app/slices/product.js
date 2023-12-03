@@ -1,102 +1,243 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ProductData } from "../data/ProductData";
-import Swal from "sweetalert2";
+import { getAllProducts, getUserFavorites, getCategories, getUserCart, getProductById, addProductToCart, deleteProductFromCart, sendOrder, getUserOrders } from "../Actions/Index";
+
 
 
 const productsSlice = createSlice({
     name: 'products',
     initialState: {
-        products: ProductData,
-        carts: ProductData.slice(2, 4),
-        favorites: ProductData.slice(1, 4),
-        single: null,  // her bir ürün temsil edelr
-
+        products: [],
+        carts: null,
+        favorites: [],
+        categories: [],
+        orders: [],
+        single: null,
+        error: null,
+        loading: true
     },
     reducers: {
-        
-
         AddToCart: (state, action) => {
-            let { id } = action.payload;
-            let sepeteEklenecekUrun = state.carts.find(item => item.id === parseInt(id))
-            if (sepeteEklenecekUrun === undefined) {
-                //sepete eklemek istediğim ürün bilgilerine getirecek ilgili rest servisi çağırılır
-                let item = state.products.find(item => item.id === parseInt(id))
-                item.quantity = 1
-                state.carts.push(item)
-                Swal.fire(
-                    {
-                        title: 'Başarılı',
-                        text: "Ürün sepete eklendi!",
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 2000
-                    }
-                )
-            }
-        },
 
-        getProductById: (state, action) => {
-            let { id } = action.payload;
-            let urunDetay = state.products.find(item => item.id === parseInt(id))
-            state.single = urunDetay
         },
 
         updateCart: (state, action) => {
-            let { val, id } = action.payload;
-            state.carts.forEach(item => {
-                if (item.id === parseInt(id)) {
-                    item.quantity = val
-                }
-            })
+
         },
 
         removeCart: (state, action) => {
-            let { id } = action.payload;
-            let sepetinOnSonHali = state.carts.filter(item => item.id !== parseInt(id))
-            state.carts = sepetinOnSonHali
+
         },
 
-        //sepeti comple silmek için
         clearCart: (state) => {
-            state.carts = []
+
         },
 
         addToFavorites: (state, action) => {
+        },
 
-            let { id } = action.payload;
-            let item = state.favorites.find(item => item.id === parseInt(id))
-            if (item === undefined) {
-                let urunFavori = state.products.find(item => item.id === parseInt(id))
-                urunFavori.quantity = 1
-                state.favorites.push(urunFavori)
-                Swal.fire(
-                    {
-                        title: 'Başarılı',
-                        text: 'İlgili ürün favorilere eklenmiştir',
-                        icon: 'success'
+        removeToFav: (state, action) => {
+
+        },
+        clearFav: (state) => {
+
+        },
+
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getAllProducts.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getAllProducts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.products = action.payload;
+
+            })
+            .addCase(getAllProducts.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+
+            })
+            .addCase(getUserFavorites.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+
+            })
+            .addCase(getUserFavorites.fulfilled, (state, action) => {
+                state.loading = false;
+                const fetchedProducts = action.payload.map(product => {
+                    return {
+                        id: product.productId,
+                        category: product.categoryName,
+                        categoryId: product.categoryId,
+                        img: product.imageUrl,
+                        title: product.name,
+                        price: product.price,
+                        description: product.description,
+                        rating: {
+                            rate: 3.9,
+                            count: 30
+                        }
+                    }
+                })
+                state.favorites = fetchedProducts;
+
+            })
+            .addCase(getUserFavorites.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+
+            })
+            .addCase(getUserCart.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+
+            })
+            .addCase(getUserCart.fulfilled, (state, action) => {
+                state.loading = false;
+                const cartHeader = action.payload
+                if (cartHeader && cartHeader.cartDetails) {
+                    state.carts = cartHeader;
+                }
+
+            })
+            .addCase(getUserCart.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+
+            })
+            .addCase(getCategories.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+
+            })
+            .addCase(getCategories.fulfilled, (state, action) => {
+                state.loading = false;
+                state.categories = action.payload || [];
+
+            })
+            .addCase(getCategories.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+
+            })
+            .addCase(getProductById.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+
+            })
+            .addCase(getProductById.fulfilled, (state, action) => {
+                state.loading = false;
+                const product = action.payload
+                if (product) {
+
+                    state.single = product;
+                }
+
+
+            })
+            .addCase(getProductById.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+
+            })
+            .addCase(addProductToCart.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+
+            })
+            .addCase(addProductToCart.fulfilled, (state, action) => {
+                state.loading = false;
+
+                const cartDto = action.payload
+
+                if (cartDto && cartDto.cartDetails) {
+                    if (!state.carts) {
+                        state.carts = {
+                            cartHeader: { ...cartDto, orderTotal: 0 },
+                            cartDetails: []
+                        }
+                    }
+                    const addedProduct = cartDto.cartDetails[0]
+                    if (addedProduct) {
+                        const productIndex = state.carts?.cartDetails.findIndex(p => p.cartDetailsId === addedProduct.cartDetailsId)
+                        if (productIndex === -1)
+                            state.carts.cartDetails.push(addedProduct);
+                        else {
+                            state.carts.cartDetails[productIndex] = addedProduct
+                        }
+                        state.carts.cartHeader.orderTotal += +addedProduct.product.price
+
+                    }
+                }
+            })
+            .addCase(deleteProductFromCart.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+
+            })
+            .addCase(deleteProductFromCart.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+
+            })
+            .addCase(deleteProductFromCart.fulfilled, (state, action) => {
+                state.loading = false;
+                const cartDetailId = action.payload
+                if (cartDetailId) {
+                    const removedProduct = state.carts.cartDetails.find(p => p.cartDetailsId === cartDetailId)
+                    if (removedProduct) {
+                        const removedProductPrice = removedProduct.product.price
+                        const removedProductCount = removedProduct.count
+                        state.carts.cartDetails = state.carts.cartDetails.filter(p => p.cartDetailsId !== cartDetailId)
+                        state.carts.cartHeader.orderTotal -= (removedProductPrice * removedProductCount)
                     }
 
-                )
+                }
 
-            }
-            else {
-                Swal.fire('Başarsız', 'İlgili ürün favorilere eklenemedi', 'warning')
-            }
+            })
+            .addCase(addProductToCart.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
 
-        },
-        
-        removeToFav: (state, action) => {
-            let { id } = action.payload;
-            let favorilerinOnSonHali = state.favorites.filter(item => item.id !== parseInt(id))
-            state.favorites = favorilerinOnSonHali
-        },
-        //favorileri temizle
-        clearFav: (state) => {
-            state.favorites = [] // state içindeki favori arrayını temizlemiş oluyor 
-        },
+            })
 
-    }
+            .addCase(sendOrder.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+
+            })
+            .addCase(sendOrder.fulfilled, (state, action) => {
+                state.loading = false;
+                state.carts = null
+
+            })
+            .addCase(sendOrder.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+
+            })
+
+            .addCase(getUserOrders.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+
+            })
+            .addCase(getUserOrders.fulfilled, (state, action) => {
+                state.loading = false;
+                state.orders = action.payload || []
+
+            })
+            .addCase(getUserOrders.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+
+            })
+
+    },
 })
+
 
 const productsReducer = productsSlice.reducer
 export default productsReducer

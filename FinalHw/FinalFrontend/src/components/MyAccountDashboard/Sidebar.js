@@ -17,7 +17,7 @@ const Sidebar = () => {
             text: 'Teşekkürler'
         })
         dispatch({ type: "user/logout" })
-        history("/login");
+        // history("/login");
     }
     return (
         <>
